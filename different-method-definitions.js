@@ -20,6 +20,5 @@
 
  };
 
-
  console.log( simpleArithmetic.add( 10, 5 ) );          // 15
  console.log( simpleArithmetic.subtract( 10, 5 ) );     // 5
