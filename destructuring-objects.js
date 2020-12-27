@@ -27,8 +27,8 @@ const staff = [
 ];
 
 const x = staff.map(x => {
-    const {name} = x;
-    return name;
+    const {name: characterName} = x;
+    return characterName;
 });
 
 
