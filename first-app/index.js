@@ -19,7 +19,7 @@ const app = express();
 // });
 
 app.get('/', (req, res) => {
-    res.send('This is the home page');
+    res.send('This is the home page!!!');
 });
 
 app.get('/r/:subreddit', (req, res) => {
@@ -48,9 +48,21 @@ app.get('/dogs', (req, res) => {
     res.send('WOOF');
 });
 
+app.get('/search', (req, res) => {
+    const {q} = req.query;
+    if(!q){
+        res.send(`<h1>Nothing found is not searched</h1>`)
+    } else {
+        console.log(req.query);
+        res.send(`<h1>Search results for ${q}</h1>`);
+    }
+});
+
 app.get('*', (req, res) => {
     res.send('I don\'t know that path');
 });
+
+
 
 
 
