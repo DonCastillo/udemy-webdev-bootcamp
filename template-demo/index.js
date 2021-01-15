@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
-
+const redditData = require('./data.json');
 const app = express();
+
+// console.log(redditData);
 
 
 app.set('view engine', 'ejs');
@@ -14,7 +16,13 @@ app.get('/', (req, res) => {
 
 app.get('/r/:subreddit', (req, res) => {
     const {subreddit} = req.params;
-    res.render('subreddit', {subreddit})
+    const data = redditData[subreddit];
+    if(data) {
+        res.render('subreddit', {...data})
+    } else {
+        res.render('notfound', {subreddit})
+    }
+
 })
 
 app.get('/rand', (req, res) => {
