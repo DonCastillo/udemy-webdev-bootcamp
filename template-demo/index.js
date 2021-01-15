@@ -23,6 +23,13 @@ app.get('/rand', (req, res) => {
     res.render('random', {num: num});   
 })
 
+app.get('/cats', (req, res) => {
+    const cats = [
+        'Blue', 'Rocket', 'Monty', 'Stephanie', 'Winston'
+    ]
+    res.render('cats', {cats})
+})
+
 app.listen(3000, () => {
     console.log('Listening on port 3000')
 })
