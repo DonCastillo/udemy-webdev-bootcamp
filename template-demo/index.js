@@ -3,8 +3,9 @@ const path = require('path');
 const redditData = require('./data.json');
 const app = express();
 
-// console.log(redditData);
 
+app.use(express.static(path.join(__dirname, '/public'))); 
+// linking css, js, and other assets from the public folder
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));   // enables to use nodemon outside the current directory
