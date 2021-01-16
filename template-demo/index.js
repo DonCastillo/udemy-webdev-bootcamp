@@ -29,7 +29,7 @@ app.get('/r/:subreddit', (req, res) => {
 app.get('/rand', (req, res) => {
     const num = Math.floor(Math.random() * 10) + 1
     // key-value pairs that are accessible in the ejs html template
-    res.render('random', {num: num});   
+    res.render('random', {num, title: 'random'});   
 })
 
 app.get('/cats', (req, res) => {
