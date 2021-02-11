@@ -31,7 +31,6 @@ const write = (username, comment) => {
 // lists all comments
 app.get('/comments', (req, res) => {
     const data = read()
-    console.log(data)
     res.render('comments/index', {data})
 })
 
@@ -44,7 +43,7 @@ app.get('/comments/new', (req, res) => {
 app.post('/comments', (req, res) => {
     const {username, comment} = req.body
     write(username, comment)
-    res.send('It worked')
+    res.redirect('/comments')
 })
 
 app.get('/tacos', (req, res) => {
