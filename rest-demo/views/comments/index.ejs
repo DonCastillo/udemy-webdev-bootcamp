@@ -10,8 +10,12 @@
     <h1>All Comments</h1>
     <ul>
         <% for(const comment of data.comments) { %>
-            <li><%= comment.comment %> - <b><%= comment.username %> </b></li>
+            <li>
+                <%= comment.comment %> - <b><%= comment.username %> </b>
+                <a href="/comments/<%= comment.id %> ">details</a>
+            </li>
         <% } %>
     </ul>
+    <a href="/comments/new">New Comment</a>
 </body>
 </html>
