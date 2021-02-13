@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const data = require("./data.json");
 const fs = require("fs");
+const { v4: uuid } = require('uuid');
+uuid(); 
 
 // accept data sent from x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -19,16 +21,16 @@ const read = () => {
 
 const write = (username, comment) => {
   let file = read();
-
-  if (file.count) {
-    file.count++;
-  } else {
-    file.count = 1;
-  }
-
-  file.comments.push({ id: file.count, username: username, comment: comment });
+  file.comments.push({ id: uuid(), username: username, comment: comment });
   fs.writeFileSync("./data.json", JSON.stringify(file));
 };
+
+const update = (id, comment) => {
+  let file = read();
+  const commentItem = file.comments.find((item) => item.id === id);
+  commentItem.comment = comment;
+  fs.writeFileSync("./data.json", JSON.stringify(file));
+}
 
 // lists all comments
 app.get("/comments", (req, res) => {
@@ -52,8 +54,15 @@ app.post("/comments", (req, res) => {
 app.get("/comments/:id", (req, res) => {
   const data = read();
   const { id } = req.params;
-  const comment = data.comments.find((item) => item.id === parseInt(id));
+  const comment = data.comments.find((item) => item.id === id);
   res.render("comments/show", { comment });
+});
+
+// update a comment
+app.patch("/comments/:id", (req, res) => {
+  const { id } = req.params;
+  update(id, req.body.comment);
+  res.redirect("/comments");
 });
 
 app.listen(3000, () => {
